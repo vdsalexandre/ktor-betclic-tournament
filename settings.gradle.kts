@@ -1,0 +1,1 @@
+rootProject.name = "com.tournament.ktor-wishow-betclic"
