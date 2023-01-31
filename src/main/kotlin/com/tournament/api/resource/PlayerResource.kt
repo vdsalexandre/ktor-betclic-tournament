@@ -1,6 +1,5 @@
 package com.tournament.api.resource
 
-import com.tournament.api.dto.PlayerDTO
 import com.tournament.domain.service.PlayerService
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.Created
@@ -45,7 +44,7 @@ fun Application.configureRouting() {
                 val nickname = call.receiveParameters()["nickname"]
 
                 if (nickname != null && nickname.length <= 50) {
-                    val player = playerService.save(PlayerDTO(nickname))
+                    val player = playerService.save(nickname)
                     call.respond(status = Created, player)
                 } else {
                     call.respond(status = BadRequest, "bad request")
