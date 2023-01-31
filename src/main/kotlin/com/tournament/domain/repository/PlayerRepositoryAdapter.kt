@@ -1,6 +1,5 @@
 package com.tournament.domain.repository
 
-import com.tournament.api.dto.PlayerDTO
 import com.tournament.domain.model.Player
 import com.tournament.domain.model.PlayerEntity
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -15,10 +14,10 @@ class PlayerRepositoryAdapter : PlayerRepository {
         PlayerEntity.all().map { it.toPlayer() }
     }
 
-    override fun save(playerDTO: PlayerDTO) = transaction {
+    override fun save(nickname: String, points: Int) = transaction {
         PlayerEntity.new {
-            nickname = playerDTO.nickname
-            points = playerDTO.points
+            this.nickname = nickname
+            this.points = points
         }.toPlayer()
     }
 
