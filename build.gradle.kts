@@ -1,14 +1,15 @@
 val ktorVersion: String by project
 val kotlinVersion: String by project
 val logbackVersion: String by project
-val exposedVersion : String by project
-val h2Version : String by project
-val koinVersion : String by project
+val exposedVersion: String by project
+val h2Version: String by project
+val koinVersion: String by project
+val assertKVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.8.0"
     id("io.ktor.plugin") version "2.2.2"
-                id("org.jetbrains.kotlin.plugin.serialization") version "1.8.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.8.0"
 }
 
 group = "com.tournament"
@@ -42,4 +43,9 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktorVersion")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
     testImplementation("io.insert-koin:koin-test-junit5:$koinVersion")
+    testImplementation("com.willowtreeapps.assertk:assertk:$assertKVersion")
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

@@ -14,6 +14,13 @@ class PlayerRepositoryAdapter : PlayerRepository {
         PlayerEntity.all().map { it.toPlayer() }
     }
 
+    override fun findAllSorted(): List<Player> = transaction {
+        PlayerEntity
+            .all()
+            .sortedByDescending { it.points }
+            .map { playerEntity -> playerEntity.toPlayer() }
+    }
+
     override fun save(nickname: String, points: Int) = transaction {
         PlayerEntity.new {
             this.nickname = nickname

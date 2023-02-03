@@ -1,10 +1,11 @@
 package com.tournament
 
-import com.tournament.api.resource.tournamentRouting
+import com.tournament.api.resource.configureRouting
+import com.tournament.domain.config.configureMonitoring
+import com.tournament.domain.config.configureSerialization
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.routing.routing
 import io.ktor.server.testing.testApplication
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -13,9 +14,9 @@ class ApplicationTest {
     @Test
     fun testRoot() = testApplication {
         application {
-            routing {
-                tournamentRouting()
-            }
+            configureSerialization()
+            configureMonitoring()
+            configureRouting()
         }
         client.get("/").apply {
             assertEquals(HttpStatusCode.OK, status)

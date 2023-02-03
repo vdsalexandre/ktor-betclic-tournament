@@ -1,6 +1,7 @@
 package com.tournament.api.resource
 
 import com.tournament.domain.service.PlayerService
+import com.tournament.domain.service.TournamentService
 import io.ktor.http.HttpStatusCode.Companion.BadRequest
 import io.ktor.http.HttpStatusCode.Companion.Created
 import io.ktor.http.HttpStatusCode.Companion.NotFound
@@ -19,12 +20,18 @@ import org.koin.ktor.ext.inject
 
 fun Application.configureRouting() {
     val playerService: PlayerService by inject()
+    val tournamentService: TournamentService by inject()
 
     routing {
         route("/tournament") {
 
             get("/player/all") {
                 call.respond(status = OK, playerService.findAll())
+            }
+
+            get("/player/all/sorted") {
+                val sortedPlayers = playerService.findAllSorted()
+                call.respond(status = OK, tournamentService.setRanking(sortedPlayers))
             }
 
             get("/player/{id}") {

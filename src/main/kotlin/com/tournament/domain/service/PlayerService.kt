@@ -9,6 +9,8 @@ class PlayerService(private val playerRepositoryAdapter: PlayerRepositoryAdapter
 
     fun findAll() = playerRepositoryAdapter.findAll()
 
+    fun findAllSorted() = playerRepositoryAdapter.findAllSorted()
+
     fun save(nickname: String, points: Int = 0) = playerRepositoryAdapter.save(nickname, points)
 
     fun delete(id: Long) = playerRepositoryAdapter.delete(id)
