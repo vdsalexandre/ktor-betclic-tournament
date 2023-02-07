@@ -25,16 +25,16 @@ fun Application.configureRouting() {
     routing {
         route("/tournament") {
 
-            get("/player/all") {
+            get("/players") {
                 call.respond(status = OK, playerService.findAll())
             }
 
-            get("/player/all/sorted") {
+            get("/players/sorted") {
                 val sortedPlayers = playerService.findAllSorted()
                 call.respond(status = OK, tournamentService.setRanking(sortedPlayers))
             }
 
-            get("/player/{id}") {
+            get("/players/{id}") {
                 try {
                     val id = call.parameters["id"]?.toLong()
                     val player = playerService.findPlayerById(id!!)
@@ -47,7 +47,7 @@ fun Application.configureRouting() {
                 }
             }
 
-            post("/player") {
+            post("/players") {
                 val nickname = call.receiveParameters()["nickname"]
 
                 if (nickname != null && nickname.length <= 50) {
@@ -58,7 +58,7 @@ fun Application.configureRouting() {
                 }
             }
 
-            put("/player/{id}") {
+            put("/players/{id}") {
                 try {
                     val id = call.parameters["id"]?.toLong()
                     val points = call.receiveParameters()["points"]?.toInt()
@@ -69,7 +69,7 @@ fun Application.configureRouting() {
                 }
             }
 
-            delete("/player/{id}") {
+            delete("/players/{id}") {
                 try {
                     val id = call.parameters["id"]?.toLong()
                     playerService.delete(id!!)
@@ -79,7 +79,7 @@ fun Application.configureRouting() {
                 }
             }
 
-            delete("/player/all") {
+            delete("/players") {
                 playerService
                     .findAll()
                     .forEach { player ->
