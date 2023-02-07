@@ -31,7 +31,22 @@ fun Application.configureRouting() {
 
             get("/players/sorted") {
                 val sortedPlayers = playerService.findAllSorted()
-                call.respond(status = OK, tournamentService.setRanking(sortedPlayers))
+                val playerDTOS = tournamentService.setRanking(sortedPlayers)
+                call.respond(status = OK, playerDTOS)
+            }
+
+            get("/players/{id}/sorted") {
+                try {
+                    val id = call.parameters["id"]?.toLong()
+                    val players = playerService.findAllSorted()
+                    val playerDTO = tournamentService.setRanking(players).find { it.id == id }
+                    if (playerDTO != null)
+                        call.respond(status = OK, playerDTO)
+                    else
+                        call.respond(status = NotFound, "player $id not found")
+                } catch (e: Exception) {
+                    call.respond(status = BadRequest, "bad request")
+                }
             }
 
             get("/players/{id}") {
