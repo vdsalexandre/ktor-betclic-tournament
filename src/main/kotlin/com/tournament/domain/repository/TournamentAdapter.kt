@@ -18,8 +18,4 @@ class TournamentAdapter : Tournament {
             }
         }
     }
-
-    override fun getRanking(id: Long): PlayerDTO {
-        TODO("Not yet implemented")
-    }
 }

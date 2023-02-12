@@ -10,7 +10,7 @@ val assertKVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.8.0"
-    id("io.ktor.plugin") version "2.2.2"
+    id("io.ktor.plugin") version "2.2.3"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.0"
 }
 
@@ -57,3 +57,29 @@ tasks.withType<KotlinCompile>().configureEach {
         jvmTarget = "17"
     }
 }
+
+/*
+// for production -> build fat JAR
+ktor {
+    fatJar {
+        archiveFileName.set("betclic-tournament.jar")
+    }
+}
+
+// for production -> dockerized application
+ktor {
+    docker {
+        jreVersion.set(io.ktor.plugin.features.JreVersion.JRE_17)
+        localImageName.set("betclic-tournament-image")
+        imageTag.set("0.0.1")
+
+        externalRegistry.set(
+            DockerImageRegistry.dockerHub(
+                appName = provider { "ktor-app" },
+                username = providers.environmentVariable("DOCKER_USERNAME"),
+                password = providers.environmentVariable("DOCKER_PASSWORD")
+            )
+        )
+    }
+}
+*/

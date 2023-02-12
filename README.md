@@ -34,3 +34,11 @@ git clone https://github.com/vdsalexandre/ktor-betclic-tournament.git
 | PUT    | http://localhost:9090/tournament/players/{id}        | **points**: Long     | update player's points in the tournament                         |
 | DELETE | http://localhost:9090/tournament/players/{id}        | **id**: Long         | remove player from the tournament based on id player             |
 | DELETE | http://localhost:9090/tournament/players             |                      | remove all players from the tournament                           |
+
+## Deploy in production
+
+- ### Build a fat JAR or Dockerized application
+    Add configuration in build.gradle.kts
+
+- ### Update datasource configuration
+    In application.yaml update datasource for production

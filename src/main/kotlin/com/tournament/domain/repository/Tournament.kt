@@ -5,5 +5,4 @@ import com.tournament.domain.model.Player
 
 interface Tournament {
     fun setRanking(players: List<Player>): List<PlayerDTO>
-    fun getRanking(id: Long): PlayerDTO
 }
